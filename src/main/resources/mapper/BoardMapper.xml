@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="BoardMapper">
+    <select id="findAll" resultType="board">
+        SELECT
+            no,
+            id,
+            title,
+            writer,
+            date_format(created_at, "%Y-%m-%d %H:%i:%s") as created_at,
+            date_format(updated_at, "%Y-%m-%d %H:%i:%s") as updated_at
+        FROM board
+        ORDER BY no DESC
+    </select>
+
+    <select id="findOne" resultType="board">
+        SELECT
+            no,
+            id,
+            title,
+            writer,
+            content,
+            date_format(created_at, "%Y-%m-%d %H:%i:%s") as created_at,
+            date_format(updated_at, "%Y-%m-%d %H:%i:%s") as updated_at
+        FROM board
+        WHERE NO = #{no}
+        ORDER BY no DESC
+    </select>
+
+    <update id="update" parameterType="board">
+        UPDATE board
+            <set>
+                <if test="id != null">
+                    id = #{id},
+                </if>
+                <if test="title != null">
+                    title = #{title},
+                </if>
+                <if test="writer != null">
+                    writer = #{writer},
+                </if>
+                <if test="content != null">
+                    content = #{content},
+                </if>
+                updated_at = now()
+            </set>
+        WHERE NO = #{no}
+    </update>
+
+    <insert id="save" parameterType="board">
+        INSERT INTO board(id, title, writer, content, created_at)
+        VALUES (#{id}, #{title}, #{writer}, #{content}, now())
+    </insert>
+
+    <delete id="delete" parameterType="board">
+        DELETE FROM board
+        WHERE NO = #{no}
+    </delete>
+</mapper>
