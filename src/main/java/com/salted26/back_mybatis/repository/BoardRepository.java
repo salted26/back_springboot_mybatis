@@ -2,7 +2,7 @@ package com.salted26.back_mybatis.repository;
 
 import com.salted26.back_mybatis.dto.BoardDTO;
 import lombok.RequiredArgsConstructor;
-import org.mybatis.spring.SqlSessionTemplate;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -13,7 +13,7 @@ import java.util.List;
 public class BoardRepository{
 
   @Autowired
-  private SqlSessionTemplate sql;
+  private SqlSession sql;
 
   public List<BoardDTO> findAll() {
     return sql.selectList("BoardMapper.findAll");

@@ -9,8 +9,9 @@
             id,
             title,
             writer,
-            date_format(created_at, "%Y-%m-%d %H:%i:%s") as created_at,
-            date_format(updated_at, "%Y-%m-%d %H:%i:%s") as updated_at
+            views,
+            created_at,
+            updated_at
         FROM board
         ORDER BY no DESC
     </select>
@@ -22,8 +23,9 @@
             title,
             writer,
             content,
-            date_format(created_at, "%Y-%m-%d %H:%i:%s") as created_at,
-            date_format(updated_at, "%Y-%m-%d %H:%i:%s") as updated_at
+            views,
+            created_at,
+            updated_at
         FROM board
         WHERE NO = #{no}
         ORDER BY no DESC
@@ -44,14 +46,14 @@
                 <if test="content != null">
                     content = #{content},
                 </if>
-                updated_at = now()
+                updated_at = getdate()
             </set>
         WHERE NO = #{no}
     </update>
 
     <insert id="save" parameterType="board">
         INSERT INTO board(id, title, writer, content, created_at)
-        VALUES (#{id}, #{title}, #{writer}, #{content}, now())
+        VALUES (#{id}, #{title}, #{writer}, #{content}, getdate())
     </insert>
 
     <delete id="delete" parameterType="board">

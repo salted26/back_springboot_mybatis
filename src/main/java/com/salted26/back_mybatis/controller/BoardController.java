@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin("*")
+@CrossOrigin(origins = "http://localhost:3000/*, *")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/board")
@@ -63,8 +63,6 @@ public class BoardController {
       return  new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-
-
 
   @PostMapping("/delete/{no}")
   public ResponseEntity<?> delete(@PathVariable("no") Long no) {
