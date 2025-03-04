@@ -14,8 +14,8 @@ public class BoardService {
   private BoardRepository boardRepository;
 
   public List<BoardDTO> findAllBoard() {
-    List<BoardDTO> boardList = boardRepository.findAll();
-    return boardList;
+    return boardRepository.findAll();
+
   }
 
   public BoardDTO findOne(Long no) {
@@ -28,7 +28,7 @@ public class BoardService {
 
   public void save(BoardDTO boardDTO) {
     boardRepository.save(boardDTO);
-  };
+  }
 
   public void delete(Long no) {
     boardRepository.delete(no);
