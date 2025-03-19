@@ -3,6 +3,7 @@ package com.salted26.back_mybatis.controller;
 import com.salted26.back_mybatis.dto.BoardDTO;
 import com.salted26.back_mybatis.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @CrossOrigin(origins = "http://localhost:3000/*, *")
 @RestController
 @RequiredArgsConstructor
@@ -21,18 +23,14 @@ public class BoardController {
 
   @GetMapping("")
   public ResponseEntity<List<BoardDTO>> findAll() {
-    try {
-      List<BoardDTO> boardList = boardService.findAllBoard();
-      return new ResponseEntity<>(boardList, HttpStatus.OK);
-    } catch (Exception e) {
-      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+    List<BoardDTO> boardList = boardService.findAllBoard();
+    return new ResponseEntity<>(boardList, HttpStatus.OK);
   }
 
-  @GetMapping("/{no}")
-  public  ResponseEntity<BoardDTO> findOne(@PathVariable("no") Long no) {
+  @GetMapping("/{id}")
+  public  ResponseEntity<BoardDTO> findOne(@PathVariable("id") Long id) {
     try {
-      BoardDTO board = boardService.findOne(no);
+      BoardDTO board = boardService.findOne(id);
       return new ResponseEntity<>(board, HttpStatus.OK);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -52,11 +50,11 @@ public class BoardController {
 
   }
 
-  @PostMapping("/update/{no}")
+  @PostMapping("/update/{id}")
   public ResponseEntity<BoardDTO> update(
-    @PathVariable Long no, @RequestBody BoardDTO boardDTO) {
+    @PathVariable Long id, @RequestBody BoardDTO boardDTO) {
     try {
-      boardDTO.setNo(no);
+      boardDTO.setId(id);
       boardService.update(boardDTO);
       return new ResponseEntity<>(boardDTO, HttpStatus.OK);
     } catch (Exception e) {
@@ -64,10 +62,10 @@ public class BoardController {
     }
   }
 
-  @PostMapping("/delete/{no}")
-  public ResponseEntity<?> delete(@PathVariable("no") Long no) {
+  @PostMapping("/delete/{id}")
+  public ResponseEntity<?> delete(@PathVariable("id") Long id) {
     try {
-      boardService.delete(no);
+      boardService.delete(id);
       return new ResponseEntity<>("delete success", HttpStatus.OK);
     } catch (Exception e) {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

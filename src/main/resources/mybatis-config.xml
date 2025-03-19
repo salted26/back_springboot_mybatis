@@ -4,5 +4,10 @@
 <configuration>
     <typeAliases>
         <typeAlias type="com.salted26.back_mybatis.dto.BoardDTO" alias="board"></typeAlias>
+        <typeAlias type="com.salted26.back_mybatis.dto.CustomerDTO" alias="customer"></typeAlias>
+        <typeAlias type="com.salted26.back_mybatis.dto.OrderDTO" alias="order"></typeAlias>
+        <typeAlias type="com.salted26.back_mybatis.dto.OrderItemDTO" alias="orderItem"></typeAlias>
+        <typeAlias type="com.salted26.back_mybatis.dto.ProductDTO" alias="product"></typeAlias>
+        <typeAlias type="com.salted26.back_mybatis.dto.SupplierDTO" alias="supplier"></typeAlias>
     </typeAliases>
 </configuration>

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="BoardMapper">
+<mapper namespace="ProductMapper">
     <select id="findAll" resultType="board">
         SELECT
             id,
@@ -11,7 +11,7 @@
             views,
             created_at,
             updated_at
-        FROM salted26.board
+        FROM board
         ORDER BY id DESC
     </select>
 
@@ -24,38 +24,38 @@
             views,
             created_at,
             updated_at
-        FROM salted26.board
+        FROM board
         WHERE ID = #{id}
         ORDER BY id DESC
     </select>
 
     <update id="update" parameterType="board">
-        UPDATE salted26.board
-            <set>
-                <if test="id != null">
-                    id = #{id},
-                </if>
-                <if test="title != null">
-                    title = #{title},
-                </if>
-                <if test="writer != null">
-                    writer = #{writer},
-                </if>
-                <if test="content != null">
-                    content = #{content},
-                </if>
-                updated_at = now()
-            </set>
+        UPDATE board
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="writer != null">
+                writer = #{writer},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            updated_at = getdate()
+        </set>
         WHERE ID = #{id}
     </update>
 
     <insert id="save" parameterType="board">
-        INSERT INTO salted26.board(email, title, writer, content, created_at)
-        VALUES (#{email}, #{title}, #{writer}, #{content}, now())
+        INSERT INTO board(email, title, writer, content, created_at)
+        VALUES (#{email}, #{title}, #{writer}, #{content}, getdate())
     </insert>
 
     <delete id="delete" parameterType="board">
-        DELETE FROM salted26.board
+        DELETE FROM board
         WHERE ID = #{id}
     </delete>
 </mapper>

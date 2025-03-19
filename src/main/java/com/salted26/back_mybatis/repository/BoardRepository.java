@@ -19,8 +19,8 @@ public class BoardRepository{
     return sql.selectList("BoardMapper.findAll");
   }
 
-  public BoardDTO findOne(Long no) {
-    return sql.selectOne("BoardMapper.findOne", no);
+  public BoardDTO findOne(Long id) {
+    return sql.selectOne("BoardMapper.findOne", id);
   }
 
   public void update(BoardDTO boardDTO) {
@@ -31,8 +31,8 @@ public class BoardRepository{
     sql.insert("BoardMapper.save", boardDTO);
   }
 
-  public void delete(Long no) {
-    sql.delete("BoardMapper.delete", no);
+  public void delete(Long id) {
+    sql.delete("BoardMapper.delete", id);
   }
 
 }

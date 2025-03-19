@@ -11,8 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class BoardDTO {
 
-  private Long no;
-  private String id;
+  private Long id;
   private String title;
   private String writer;
   private String content;

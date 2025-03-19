@@ -18,8 +18,8 @@ public class BoardService {
 
   }
 
-  public BoardDTO findOne(Long no) {
-    return boardRepository.findOne(no);
+  public BoardDTO findOne(Long id) {
+    return boardRepository.findOne(id);
   }
 
   public void update(BoardDTO boardDTO) {
@@ -30,7 +30,7 @@ public class BoardService {
     boardRepository.save(boardDTO);
   }
 
-  public void delete(Long no) {
-    boardRepository.delete(no);
+  public void delete(Long id) {
+    boardRepository.delete(id);
   }
 }

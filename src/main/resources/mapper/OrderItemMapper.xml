@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="OrderItemMapper">
+  <select id="findAll" resultType="orderItem">
+    SELECT
+      id,
+      orderId,
+      productId,
+      unitPrice,
+      quantity
+    FROM salted26.orderItem
+    ORDER BY id DESC
+  </select>
+
+  <select id="findOrderItemList" resultType="orderItem">
+    SELECT
+      a.id,
+      a.orderId,
+      a.productId,
+      p.productName,
+      a.unitPrice,
+      a.quantity,
+      b.orderNumber,
+      b.orderDate
+    FROM salted26.orderItem a
+        LEFT JOIN salted26.order b
+        ON a.orderId = b.id
+        LEFT JOIN salted26.product p
+        ON a.productId = p.id
+    WHERE a.orderId = #{orderId}
+    ORDER BY a.id DESC
+  </select>
+
+  <update id="update" parameterType="orderItem">
+    UPDATE salted26.orderItem
+    <set>
+      <if test="id != null">
+        id = #{id},
+      </if>
+      <if test="orderId != null">
+        orderId = #{orderId},
+      </if>
+      <if test="productId != null">
+        productId = #{productId},
+      </if>
+      <if test="unitPrice != null">
+        unitPrice = #{unitPrice},
+      </if>
+      <if test="quantity != null">
+        quantity = #{quantity},
+      </if>
+    </set>
+    WHERE ID = #{id}
+  </update>
+
+  <insert id="save" parameterType="orderItem">
+    INSERT INTO salted26.orderItem(orderId, productId, unitPrice, quantity)
+    VALUES (#{orderId}, #{productId}, #{unitPrice}, #{quantity})
+  </insert>
+
+  <delete id="delete" parameterType="orderItem">
+    DELETE FROM salted26.orderItem
+    WHERE ID = #{id}
+  </delete>
+</mapper>

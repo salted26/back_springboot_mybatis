@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SupplierMapper">
+    <select id="findAll" resultType="supplier">
+        SELECT
+            id,
+            companyName,
+            contactName,
+            city,
+            country,
+            phone,
+            fax
+        FROM supplier
+        ORDER BY id DESC
+    </select>
+
+    <select id="findOne" resultType="supplier">
+        SELECT
+            id,
+            companyName,
+            contactName,
+            city,
+            country,
+            phone,
+            fax
+        FROM supplier
+        WHERE ID = #{id}
+        ORDER BY id DESC
+    </select>
+
+    <update id="update" parameterType="supplier">
+        UPDATE supplier
+        <set>
+            <if test="id != null">
+                id = #{id},
+            </if>
+            <if test="companyName != null">
+                companyName = #{companyName},
+            </if>
+            <if test="contactName != null">
+                contactName = #{contactName},
+            </if>
+            <if test="city != null">
+                city = #{city},
+            </if>
+            <if test="country != null">
+                country = #{country},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="fax != null">
+                fax = #{fax},
+            </if>
+        </set>
+        WHERE ID = #{id}
+    </update>
+
+    <insert id="save" parameterType="supplier">
+        INSERT INTO supplier(companyName, contactName, city, country, phone, fax)
+        VALUES (#{companyName}, #{contactName}, #{city}, #{country}, #{phone}, #{fax})
+    </insert>
+
+    <delete id="delete" parameterType="supplier">
+        DELETE FROM supplier
+        WHERE ID = #{id}
+    </delete>
+</mapper>
